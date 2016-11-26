@@ -6,6 +6,16 @@
 #include<locale.h>
 #include<time.h>
 
+/*
+https://github.com/andremorales/registros
+set project
+function      status
+Incluir       not done
+Buscar        done
+Listar        not done
+Alterar       not done
+Excluir       done
+*/
 struct registro {
   int cod;
   char nome[30];
@@ -23,6 +33,7 @@ void zerar();
 int verifica_cod(int cod);
 void excluir();
 int pronome(char auxpronome[30]);
+int verifica_tel(int tel);
 
 main() {
   system("MODE con cols=139 lines=40");
@@ -157,7 +168,7 @@ main() {
         printf("    +:+    +:+        +:+    +:+  +:+   +:+  +:+    +:+      +:+      +:+      +:+\n");
         printf("    +#+    +#+        +#++:++#++ +#++:++#++: +#+    +:+      +#+      +#+      +#+\n");
         printf("    +#+    +#+        +#+    +#+ +#+     +#+ +#+    +#+      +#+      +#+      +#+\n");
-        printf("    #+#    #+#    #+# #+#    #+# #+#     #+# #+#    #+#\n");
+        printf("    #+#    #+#    #+# #+#    #+# #+#     #+# #+#    #+#                           \n");
         printf("    ###     ########  ###    ### ###     ###  ########       ###      ###      ###\n");
         break;
       }
@@ -169,16 +180,39 @@ main() {
 //---------------------------------------------------------------------------------------------------------------
 // cadastrar
 void cadastrar (int cod, int pos) {
+  int aux=0,auxcont=999,cond,auxtel;
+  char auxnome [30];
   fflush(stdin);
   pos=verifica_pos();
   registros[pos].cod=cod;
   fflush(stdin);
-  printf("\nNome:\n");
-  gets(registros[pos].nome);
-  fflush(stdin);
-  printf("\nTelefone\n");
-  scanf("%d",&registros[pos].tel);
-  fflush(stdin);
+  do {
+    printf("\nNome:\n");
+    gets(auxnome);
+    fflush(stdin);
+    auxcont=pronome(auxnome);
+    if (auxcont !=999 ) {
+      printf("\nNome ja existente !\n");
+      aux=1;
+    }
+    else{
+      aux=0;
+      strcpy(registros[pos].nome,auxnome);
+    }
+  } while(aux!=0);
+  do{
+    printf("\nTelefone\n");
+    scanf("%d",&auxtel);
+    fflush(stdin);
+    cond=verifica_tel(auxtel);
+    printf("%d\n",cond);
+    if (cond!=999){
+      printf("\nTelefone ja existente !\n");
+    }
+    else{
+      registros[pos].tel=auxtel;
+    }
+  }while (cond!=999);
   printf("\nSexo (M ou F):\n");
   gets(registros[pos].sex);
   fflush(stdin);
@@ -241,16 +275,28 @@ int verifica_cod(int cod) {
   return(1);
 }
 //--------------------------------------------------------------------------------------------------------------------------
+// verifica_tel
+int verifica_tel(int tel) {
+  int cont=0,resu=999;
+  for (cont=0;cont<=100;cont++){
+    if (registros[cont].tel==tel){
+      resu=cont;
+    }
+  }
+return(resu);
+}
+
+//--------------------------------------------------------------------------------------------------------------------------
 // Procura nome
 int pronome(char auxpronome[30]){
 
   int cont,aux=999,auxcont;
 
   for(cont=0; cont<=100;cont++){
-      auxcont=strcmp(registros[cont].nome,auxpronome);
-      if (auxcont==0) {
-        aux=cont;
-      }
+    auxcont=strcmp(registros[cont].nome,auxpronome);
+    if (auxcont==0) {
+      aux=cont;
+    }
   }
   return(aux);
 }
@@ -258,60 +304,61 @@ int pronome(char auxpronome[30]){
 //--------------------------------------------------------------------------------------------------------------------------
 // excluir
 void excluir() {
-char auxnome[30];
-int cod,aux,tel,cont=0,op=0;
+  char auxnome[30];
+  int cod,aux,tel,cont=0,op=0;
 
 
-    printf("\nEscolha metodo de Exclusao\n\n1 - Por codigo\n2 - Por telefone \n3 - Por nome\n\nopcao: ");
+  printf("\nEscolha metodo de Exclusao\n\n1 - Por codigo\n2 - Por telefone \n3 - Por nome\n\nopcao: ");
+  fflush(stdin);
+  scanf("%d",&op);
+
+
+  if (op==1) {
+    printf("\nEntre com o codigo do registro que deseja excluir\n");
+    scanf("%d",&cod);
+    while (cont<=100) {
+      if (registros[cont].cod==cod)
+      if (registros[cont].vazio==1) {
+        registros[cont].vazio=0;
+        printf("\nExclusao feita com sucesso\n");
+        break;
+      }
+      cont++;
+      if (cont>100)
+      printf("\nCodigo nao encontrado\n");
+    }
+  }
+
+  if (op==2) {
+    printf("\nEntre com o telefone do registro que deseja excluir\n");
+    scanf("%d",&tel);
+
+
+    while (cont<=100) {
+      if (registros[cont].tel==tel)
+      if (registros[cont].vazio==1) {
+        registros[cont].vazio=0;
+        printf("\nExclusao feita com sucesso\n");
+        break;
+      }
+      cont++;
+      if (cont>100)
+      printf("\nTelefone nao encontrado\n");
+    }
+  }
+  if (op==3) {
+    printf("\nEntre com o nome do registro que deseja excluir\n\n");
     fflush(stdin);
-    scanf("%d",&op);
-
-
-    if (op==1) {
-      printf("\nEntre com o codigo do registro que deseja excluir\n");
-      scanf("%d",&cod);
-      while (cont<=100) {
-        if (registros[cont].cod==cod)
-        if (registros[cont].vazio==1) {
-          registros[cont].vazio=0;
-          printf("\nExclusao feita com sucesso\n");
-          break;
-        }
-        cont++;
-        if (cont>100)
-        printf("\nCodigo nao encontrado\n");
-      }
-    }
-
-    if (op==2) {
-      printf("\nEntre com o telefone do registro que deseja excluir\n");
-      scanf("%d",&tel);
-
-
-      while (cont<=100) {
-        if (registros[cont].tel==tel)
-        if (registros[cont].vazio==1) {
-          registros[cont].vazio=0;
-          printf("\nExclusao feita com sucesso\n");
-          break;
-        }
-        cont++;
-        if (cont>100)
-        printf("\nTelefone nao encontrado\n");
-      }
-    }
-    if (op==3) {
-      printf("\nEntre com o nome do registro que deseja excluir\n\n");
-      fflush(stdin);
-      gets(auxnome);
-      aux=pronome(auxnome);
-      if(aux!=999){
+    gets(auxnome);
+    aux=pronome(auxnome);
+    if(aux!=999){
       registros[aux].vazio=0;
+      printf("\nExclusao feita com sucesso\n");
     }
     else{
       printf("\nNome nao encontrado\n");
     }
-    }
-    printf("\n\n");
-    system("pause");
   }
+  printf("\n\n");
+  system("pause");
+}
