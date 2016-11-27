@@ -10,10 +10,10 @@
 https://github.com/andremorales/registros
 set project
 function      status
-Incluir       not done
+Incluir       done
 Buscar        done
 Listar        not done
-Alterar       not done
+Alterar       done
 Excluir       done
 */
 struct registro {
@@ -28,6 +28,7 @@ struct registro {
 
 void cadastrar(int cod, int pos);
 void consultar();
+void alterar (int cod);
 int verifica_pos();
 void zerar();
 int verifica_cod(int cod);
@@ -41,6 +42,7 @@ main() {
   zerar();
   srand(time(NULL));
   for (int abert=1;abert<5;abert++){
+    system("color a");
     printf("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n");
     printf("8 888888888o.   8 8888888888       ,o888888o.    8 8888    d888888o. 8888888 8888888888 8 888888888o.      ,o888888o.       d888888o.    \n");
     printf("8 8888    `88.  8 8888            8888     `88.  8 8888  .`8888:' `88.     8 8888       8 8888    `88.  . 8888     `88.   .`8888:' `88.  \n");
@@ -62,6 +64,7 @@ main() {
     printf(":+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:  \n");
     printf("  :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::\n");
     system("cls");
+    system("color 3");
     printf(" # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n");
     printf("8 888888888o.   8 8888888888       ,o888888o.    8 8888    d888888o. 8888888 8888888888 8 888888888o.      ,o888888o.       d888888o.    \n");
     printf("8 8888    `88.  8 8888            8888     `88.  8 8888  .`8888:' `88.     8 8888       8 8888    `88.  . 8888     `88.   .`8888:' `88.  \n");
@@ -85,9 +88,9 @@ main() {
 
     system("cls");
   };
-  int op=0,retorno,codaux=0,posicao;
-  while(op!=4){
-
+  int op=0,retorno,codaux=0,posicao,codauxalt=0;
+  while(op!=5){
+    system("color a");
     system("cls");
     printf("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n\n");
     printf("8 888888888o.   8 8888888888       ,o888888o.    8 8888    d888888o. 8888888 8888888888 8 888888888o.      ,o888888o.       d888888o.    \n");
@@ -104,12 +107,15 @@ main() {
     printf("  :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: ::::   BY: ANDRE MORALES      : ::: :::\n");
     printf(":+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+:   :+:+: :+: :::                        :+:+: :+:  \n");
     printf("  :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::::   ::: :::\n");
-    printf("\n\n\nMENU\n\n1 - Cadastrar\n2 - Consultar\n3 - Excluir\n4 - Sair\n\nOpcao:  ");
+    printf("\n\n\nMENU\n\n1 - Cadastrar\n2 - Consultar\n3 - Excluir\n4 - Alterar\n5 - Sair\n\nOpcao:  ");
     scanf("%d",&op);
     fflush(stdin);
+    system("color 7");
     switch(op) {
       case 1: {                  // CADASTRAR
         system("cls");
+        system("color a");
+        printf("\n\n");
         printf("         ::::::::      :::     :::::::::      :::      :::::::: ::::::::::: :::::::::   :::::::: \n");
         printf("        :+:    :+:   :+: :+:   :+:    :+:   :+: :+:   :+:    :+:    :+:     :+:    :+: :+:    :+: \n");
         printf("        +:+         +:+   +:+  +:+    +:+  +:+   +:+  +:+           +:+     +:+    +:+ +:+    +:+ \n");
@@ -139,6 +145,8 @@ main() {
       }
       case 2: {                  // CONSULTAR
         system("cls");
+        printf("\n\n");
+        system("color a");
         printf(" ::::::::   ::::::::  ::::    :::  ::::::::  :::    ::: :::    ::::::::::: :::     \n");
         printf(":+:    :+: :+:    :+: :+:+:   :+: :+:    :+: :+:    :+: :+:        :+:   :+: :+:   \n");
         printf("+:+        +:+    +:+ :+:+:+  +:+ +:+        +:+    +:+ +:+        +:+  +:+   +:+  \n");
@@ -151,6 +159,8 @@ main() {
       }
       case 3: {
         system("cls");
+        printf("\n\n");
+        system("color a");
         printf(" ::::::::: :::    :::  ::::::::  :::       :::    ::: ::::::::::: :::::::::  \n");
         printf(":+:        :+:    :+: :+:    :+: :+:       :+:    :+:     :+:     :+:    :+: \n");
         printf("+:+         +:+  +:+  +:+        +:+       +:+    +:+     +:+     +:+    +:+ \n");
@@ -163,6 +173,33 @@ main() {
       }
       case 4: {
         system("cls");
+        system("color a");
+        printf("\n\n");
+        printf("    :::     :::    ::::::::::: :::::::::: :::::::::      :::     :::::::::  \n");
+        printf("  :+: :+:   :+:        :+:     :+:        :+:    :+:   :+: :+:   :+:    :+: \n");
+        printf(" +:+   +:+  +:+        +:+     +:+        +:+    +:+  +:+   +:+  +:+    +:+ \n");
+        printf("+#++:++#++: +#+        +#+     +#++:++#   +#++:++#:  +#++:++#++: +#++:++#:  \n");
+        printf("+#+     +#+ +#+        +#+     +#+        +#+    +#+ +#+     +#+ +#+    +#+ \n");
+        printf("#+#     #+# #+#        #+#     #+#        #+#    #+# #+#     #+# #+#    #+# \n");
+        printf("###     ### ########## ###     ########## ###    ### ###     ### ###    ### \n");
+        printf("\nEntre com o codigo desejado\n");
+        fflush(stdin);
+        //printf("Codigo %d\n\n",codauxalt);
+        scanf("%d",&codauxalt);fflush(stdin);
+        if (registros[codauxalt].vazio==1) {
+          alterar(codauxalt);
+        }
+        else {
+          printf("\n Codigo nao encontrado \n");
+          printf("\n\n");
+          system("pause");
+        }
+        break;
+      }
+      case 5: {
+        system("cls");
+        system("color a");
+        printf("\n\n");
         printf("::::::::::: ::::::::  :::    :::     :::     :::    :::      :::      :::      :::\n");
         printf("    :+:    :+:    :+: :+:    :+:   :+: :+:   :+:    :+:      :+:      :+:      :+:\n");
         printf("    +:+    +:+        +:+    +:+  +:+   +:+  +:+    +:+      +:+      +:+      +:+\n");
@@ -205,7 +242,6 @@ void cadastrar (int cod, int pos) {
     scanf("%d",&auxtel);
     fflush(stdin);
     cond=verifica_tel(auxtel);
-    printf("%d\n",cond);
     if (cond!=999){
       printf("\nTelefone ja existente !\n");
     }
@@ -224,23 +260,92 @@ void cadastrar (int cod, int pos) {
   printf("\n\n");
   system("pause");
 }
+//---------------------------------------------------------------------------------------------------------------
+// alterar
+void alterar (int pos) {
+  int aux=0,auxcont=999,cond,auxtel;
+  char auxnome [30];
+  fflush(stdin);
+  do {
+    printf("\nNome:\n");
+    gets(auxnome);
+    fflush(stdin);
+    auxcont=pronome(auxnome);
+    if (auxcont !=999 ) {
+      printf("\nNome ja existente !\n");
+      aux=1;
+    }
+    else{
+      aux=0;
+      strcpy(registros[pos].nome,auxnome);
+    }
+  } while(aux!=0);
+  do{
+    printf("\nTelefone\n");
+    scanf("%d",&auxtel);
+    fflush(stdin);
+    cond=verifica_tel(auxtel);
+    if (cond!=999){
+      printf("\nTelefone ja existente !\n");
+    }
+    else{
+      registros[pos].tel=auxtel;
+    }
+  }while (cond!=999);
+  printf("\nSexo (M ou F):\n");
+  gets(registros[pos].sex);
+  fflush(stdin);
+  printf("\nJogo preferido:\n");
+  gets(registros[pos].jog);
+  fflush(stdin);
+  registros[pos].vazio=1;
+  printf("\nAlteracao realizada com Sucesso!\n\n");
+  printf("chego" );
+  printf("\n\n");
+  system("pause");
+}
 //----------------------------------------------------------------------------------------------------------------
 //consultar
 void consultar() {
-  int cont=0, cod;
-  printf("\nEntre com o codigo\n");
-  scanf("%d",&cod);
-  while(cont<=100) {
-    if (registros[cont].cod==cod) {
-      if (registros[cont].vazio==1) {
-        printf("\nNome: %s",registros[cont].nome);
-        printf("\nTelefone: %d",registros[cont].tel);
-        break;
+  int op,tel,auxtel,auxnome;
+  char nome [30];
+  printf("\n\n\n1 - Por Telefone\n2 - Por Nome\n\nOpcao:  ");
+  scanf("%d",&op);
+  switch(op){
+    case 1:{
+      printf("\n Numero desejado\n");
+      scanf("%d",&tel);
+      auxtel=verifica_tel(tel);
+
+      if (auxtel!=999){
+        printf("\nCodigo : %d\n",registros[auxtel].cod);
+        printf("\nNome : %s\n",registros[auxtel].nome);
+        printf("\nTelefone : %d\n",registros[auxtel].tel);
+        printf("\nSexo : %s\n",registros[auxtel].sex);
+        printf("\nJogo preferido : %s\n",registros[auxtel].jog);
       }
+      else{
+        printf("\n Telefone não encotrado !\n");
+      }
+      break;
     }
-    cont++;
-    if (cont>100)
-    printf("\nCodigo nao encontrado\n");
+    case 2:{
+      printf("\n Nome desejado\n");
+      fflush(stdin);
+      gets(nome);
+      auxnome=pronome(nome);
+      if (auxnome!=999){
+        printf("\nCodigo : %d\n",registros[auxnome].cod);
+        printf("\nNome : %s\n",registros[auxnome].nome);
+        printf("\nTelefone : %d\n",registros[auxnome].tel);
+        printf("\nSexo : %s\n",registros[auxnome].sex);
+        printf("\nJogo preferido : %s\n",registros[auxnome].jog);
+      }
+      else{
+        printf("\n Nome não encotrado !\n");
+      }
+      break;
+    }
   }
   printf("\n\n");
   system("pause");
@@ -283,7 +388,7 @@ int verifica_tel(int tel) {
       resu=cont;
     }
   }
-return(resu);
+  return(resu);
 }
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -306,13 +411,9 @@ int pronome(char auxpronome[30]){
 void excluir() {
   char auxnome[30];
   int cod,aux,tel,cont=0,op=0;
-
-
   printf("\nEscolha metodo de Exclusao\n\n1 - Por codigo\n2 - Por telefone \n3 - Por nome\n\nopcao: ");
   fflush(stdin);
   scanf("%d",&op);
-
-
   if (op==1) {
     printf("\nEntre com o codigo do registro que deseja excluir\n");
     scanf("%d",&cod);
@@ -332,8 +433,6 @@ void excluir() {
   if (op==2) {
     printf("\nEntre com o telefone do registro que deseja excluir\n");
     scanf("%d",&tel);
-
-
     while (cont<=100) {
       if (registros[cont].tel==tel)
       if (registros[cont].vazio==1) {
